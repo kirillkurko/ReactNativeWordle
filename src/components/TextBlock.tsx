@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: 'white',
+    borderColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000',
     fontWeight: 'bold',
   },
 });

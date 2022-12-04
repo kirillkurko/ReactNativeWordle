@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { StyleSheet, Text, View, Clipboard, Platform } from 'react-native';
+import { StyleSheet, Text, View, Clipboard } from 'react-native';
 import styled from 'styled-components/native';
 import Button from '../components/Button';
 import Keyboard, { SpecialKeyboardKeys } from '../components/Keyboard';
@@ -18,7 +18,7 @@ import {
 } from '../utils/gameUtils';
 
 const Wrapper = styled.SafeAreaView`
-  background-color: black;
+  background-color: #a69cac;
   flex: 1;
 `;
 
@@ -33,7 +33,7 @@ const Game = () => {
   const wordToGuess = useRef<string>('xxxxx');
 
   useEffect(() => {
-    if (gameOver === false) {
+    if (!gameOver) {
       wordToGuess.current = getRandomWord();
       setInputWord('');
       setGuessList([]);
@@ -66,9 +66,9 @@ const Game = () => {
 
   const onKeyPress = useCallback(
     (key: string) => {
-      if (key === SpecialKeyboardKeys.DELETE) {
+      if (key === SpecialKeyboardKeys.Delete) {
         setInputWord((prev) => prev.slice(0, -1));
-      } else if (key === SpecialKeyboardKeys.GUESS) {
+      } else if (key === SpecialKeyboardKeys.Guess) {
         setGuessList((prev) => [...prev, inputWord.toUpperCase()]);
         setInputWord('');
       } else if (key.length === 1) {
@@ -83,25 +83,6 @@ const Game = () => {
     },
     [disabledLetters, inputWord],
   );
-
-  useEffect(() => {
-    if (Platform.OS === 'web') {
-      const callback = (event: KeyboardEvent) => {
-        const { key } = event;
-
-        if (/^[A-Za-z]$/.test(key)) {
-          onKeyPress(key.toUpperCase());
-        } else if (key === 'Enter' && inputWord.length === MAX_WORD_LEN) {
-          onKeyPress(SpecialKeyboardKeys.GUESS);
-        } else if (key === 'Backspace') {
-          onKeyPress(SpecialKeyboardKeys.DELETE);
-        }
-      };
-
-      window.addEventListener('keyup', callback);
-      return () => window.removeEventListener('keyup', callback);
-    }
-  }, [inputWord.length, onKeyPress]);
 
   const wordleEmoji: string = useMemo(() => {
     if (!gameOver) {
@@ -172,7 +153,7 @@ const Game = () => {
               disabledKeyList={[
                 ...disabledLetters,
                 inputWord.length !== MAX_WORD_LEN
-                  ? SpecialKeyboardKeys.GUESS
+                  ? SpecialKeyboardKeys.Guess
                   : '',
               ]}
               onKeyPress={onKeyPress}
@@ -195,7 +176,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   textWhite: {
-    color: '#fff',
+    color: '#000',
     fontSize: 22,
   },
   row: {
@@ -210,7 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   score: {
-    color: '#fff',
+    color: '#000',
     fontSize: 14,
     marginBottom: 12,
   },
