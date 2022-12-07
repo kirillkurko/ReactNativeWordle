@@ -8,7 +8,8 @@ import React, {
 import { StyleSheet, Text, View, Clipboard } from 'react-native';
 import styled from 'styled-components/native';
 import Button from '../components/Button';
-import Keyboard, { SpecialKeyboardKeys } from '../components/Keyboard';
+import Keyboard from '../components/Keyboard';
+import { ActionKey } from '../components/Keyboard/ActionKey';
 import TextBlock, { TextBlockState } from '../components/TextBlock';
 import { MAX_GUESSES, MAX_WORD_LEN } from '../constants/gameConstants';
 import {
@@ -66,9 +67,9 @@ const Game = () => {
 
   const onKeyPress = useCallback(
     (key: string) => {
-      if (key === SpecialKeyboardKeys.Delete) {
+      if (key === ActionKey.Delete) {
         setInputWord((prev) => prev.slice(0, -1));
-      } else if (key === SpecialKeyboardKeys.Guess) {
+      } else if (key === ActionKey.Guess) {
         setGuessList((prev) => [...prev, inputWord.toUpperCase()]);
         setInputWord('');
       } else if (key.length === 1) {
@@ -152,9 +153,7 @@ const Game = () => {
             <Keyboard
               disabledKeyList={[
                 ...disabledLetters,
-                inputWord.length !== MAX_WORD_LEN
-                  ? SpecialKeyboardKeys.Guess
-                  : '',
+                inputWord.length !== MAX_WORD_LEN ? ActionKey.Guess : '',
               ]}
               onKeyPress={onKeyPress}
             />
