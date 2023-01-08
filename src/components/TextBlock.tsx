@@ -1,57 +1,47 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import styled from 'styled-components/native';
+
+const Wrapper = styled.View`
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Text = styled.Text`
+  font-size: 16px;
+  color: #000;
+  font-weight: bold;
+`;
 
 export enum TextBlockState {
-  GUESS = 'guess',
-  CORRECT = 'correct',
-  POSSIBLE = 'possible',
-  INCORRECT = 'incorrect',
+  Guess = 'Guess',
+  Correct = 'Correct',
+  Possible = 'Possible',
+  Incorrect = 'Incorrect',
 }
 
 const ColorMap: Record<TextBlockState, string> = {
-  [TextBlockState.GUESS]: 'transparent',
-  [TextBlockState.CORRECT]: '#76b041',
-  [TextBlockState.POSSIBLE]: '#FFC914',
-  [TextBlockState.INCORRECT]: '#8b939c',
+  [TextBlockState.Guess]: 'transparent',
+  [TextBlockState.Correct]: '#76b041',
+  [TextBlockState.Possible]: '#FFC914',
+  [TextBlockState.Incorrect]: '#8b939c',
 };
 
-interface TextBlockProps {
+interface Props {
   text: string;
   state: TextBlockState;
 }
 
-const TextBlock = (props: TextBlockProps) => {
-  const { text, state } = props;
-
+const TextBlock = ({ text, state }: Props) => {
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: ColorMap[state],
-        },
-      ]}
-    >
-      <Text style={styles.text}>{text.toUpperCase()}</Text>
-    </View>
+    <Wrapper style={{ backgroundColor: ColorMap[state] }}>
+      <Text>{text.toUpperCase()}</Text>
+    </Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: 40,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 16,
-    color: '#000',
-    fontWeight: 'bold',
-  },
-});
 
 export default TextBlock;

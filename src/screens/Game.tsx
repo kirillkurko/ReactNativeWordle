@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   fg1: {
+    marginTop: 100,
     flexGrow: 1,
   },
   textWhite: {

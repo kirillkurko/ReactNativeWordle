@@ -10,7 +10,13 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={Screen.Game}>
-        <Stack.Group screenOptions={{ headerShown: false }}>
+        <Stack.Group
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#a69cac',
+            },
+          }}
+        >
           <Stack.Screen name={Screen.Game} component={Game} />
         </Stack.Group>
       </Stack.Navigator>
