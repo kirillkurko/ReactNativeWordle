@@ -29,9 +29,11 @@
     }
   },
   "rules": {
+    "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "unicorn/prefer-query-selector": "off",
     "unicorn/prevent-abbreviations": "off",
+    "import/prefer-default-export": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "react/function-component-definition": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
