@@ -101,16 +101,16 @@ const Game = () => {
             <View key={`row-${rowIndex}`} style={styles.row}>
               {row.map((_, colIndex) => {
                 const guessLetter = guessList[rowIndex]?.[colIndex];
-                let state: TextBlockState = TextBlockState.GUESS;
+                let state: TextBlockState = TextBlockState.Guess;
 
                 if (guessLetter === undefined) {
-                  state = TextBlockState.GUESS;
+                  state = TextBlockState.Guess;
                 } else if (guessLetter === wordToGuess.current[colIndex]) {
-                  state = TextBlockState.CORRECT;
+                  state = TextBlockState.Correct;
                 } else if (wordToGuess.current.includes(guessLetter)) {
-                  state = TextBlockState.POSSIBLE;
+                  state = TextBlockState.Possible;
                 } else {
-                  state = TextBlockState.INCORRECT;
+                  state = TextBlockState.Incorrect;
                 }
 
                 const letterToShow =
